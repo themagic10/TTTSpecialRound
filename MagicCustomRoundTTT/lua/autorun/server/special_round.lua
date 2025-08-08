@@ -5,8 +5,9 @@ util.AddNetworkString("SpecialRoundStart")
 
 MagicSpecialRound = {}
 MagicSpecialRound.name = "TTT Special Round"
-MagicSpecialRound.version = "0.1.1"
+MagicSpecialRound.version = "0.3"
 MagicSpecialRound.author = "Magic_1_0"
+--maybe leave a comment before sending a friend request to let me know you're not a spammer
 MagicSpecialRound.steamcontact = "https://steamcommunity.com/profiles/76561198196016631" 
 
 MagicSpecialRound.utils = include("special_round_utils.lua")
