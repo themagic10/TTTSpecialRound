@@ -162,6 +162,20 @@ end
 
 
 --[[
+    Removes all random weapon and ammo drops from the map
+]]
+tbl.RemoveMapAll = function()
+    tbl.RemoveMapWeapons()
+    for _, e in ipairs(ents.GetAll()) do
+        local class = e:GetClass()
+        if class == "item_box_buckshot_ttt" or string.StartsWith(class, "item_ammo_") then
+            e:Remove()
+        end
+    end
+end
+
+
+--[[
     Removes all the weapons on all players
 ]]
 tbl.RemoveAllPlayerWeapons = function()

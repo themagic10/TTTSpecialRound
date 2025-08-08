@@ -1,4 +1,4 @@
-if engine.ActiveGamemode() != "terrortown" then return end
+if engine.ActiveGamemode() ~= "terrortown" then return end
 
 util.AddNetworkString("SpecialRoundPreparing")
 util.AddNetworkString("SpecialRoundStart")
@@ -15,7 +15,7 @@ local specialrounds = {}
 local files, _ = file.Find("special_rounds/*.lua", "LUA")
 for _, filename in ipairs(files) do
     local specialrnd = include("special_rounds/" .. filename)
-    if specialrnd != nil then table.insert(specialrounds, specialrnd) end
+    if specialrnd ~= nil then table.insert(specialrounds, specialrnd) end
 end
 
 MagicSpecialRound.isSpecialround = false
