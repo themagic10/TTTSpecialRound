@@ -7,7 +7,14 @@ ffa.name = "ffa"
 ffa.title = "Free for all!"
 
 
+ffa.desc = "Kill everyone! Last one standing is the winner"
+
+
 ffa.utils = include("special_round_utils.lua")
+
+
+ffa.prepare = function()
+end
 
 
 ffa.begin = function()

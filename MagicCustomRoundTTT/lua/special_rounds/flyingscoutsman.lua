@@ -7,7 +7,15 @@ flyingscoutsman.name = "flyingscoutsman"
 flyingscoutsman.title = "Flying Scoutsman"
 
 
+flyingscoutsman.desc = "Scouts only, low gravity (Yes, like in good old CS:GO)"
+
+
 flyingscoutsman.utils = include("special_round_utils.lua")
+
+
+flyingscoutsman.prepare = function()
+    flyingscoutsman.utils.RemoveMapWeapons()
+end
 
 
 flyingscoutsman.begin = function()
@@ -15,7 +23,7 @@ flyingscoutsman.begin = function()
     flyingscoutsman.utils.setAllTraitor()
     flyingscoutsman.utils.DisableCredits()
     RunConsoleCommand("sv_gravity", "100")
-    flyingscoutsman.utils.RemoveMapWeapons()
+    
     for _, ply in ipairs(player:GetAll()) do
         if IsValid(ply) and ply:Alive() then
             ply:StripWeapons()

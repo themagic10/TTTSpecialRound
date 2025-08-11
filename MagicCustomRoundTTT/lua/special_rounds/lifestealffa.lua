@@ -7,7 +7,14 @@ lifestealffa.name = "lifestealffa"
 lifestealffa.title = "Free for all, vampire edition"
 
 
+lifestealffa.desc = "Free for all, you gain health by dealing damage to other players (health can go beyond 100)"
+
+
 lifestealffa.utils = include("special_round_utils.lua")
+
+
+lifestealffa.prepare = function()
+end
 
 
 lifestealffa.begin = function()

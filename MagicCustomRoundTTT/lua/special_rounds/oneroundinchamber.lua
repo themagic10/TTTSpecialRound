@@ -7,14 +7,21 @@ oneshotpistol.name = "oneshotpistol"
 oneshotpistol.title = "FFA pistols, only 1 bullet. Kill for another shot"
 
 
+oneshotpistol.desc = "You only have a pistol with 1 bullet, kill a player to earn another round. Last one standing wins (feel free to use your crowbar if you run out of bullets)"
+
+
 oneshotpistol.utils = include("special_round_utils.lua")
+
+
+oneshotpistol.prepare = function()
+    oneshotpistol.utils.RemoveMapAll()
+end
 
 
 oneshotpistol.begin = function()
     oneshotpistol.utils.setFFAWinCondition()
     oneshotpistol.utils.setAllTraitor()
     oneshotpistol.utils.DisableCredits()
-    oneshotpistol.utils.RemoveMapAll()
     oneshotpistol.utils.RemoveAllPlayerWeapons()
 
     for _, ply in ipairs(player:GetAll()) do

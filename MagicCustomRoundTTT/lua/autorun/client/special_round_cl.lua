@@ -1,8 +1,12 @@
 net.Receive("SpecialRoundPreparing", function()
-    chat.AddText(Color(100, 255, 255), "SPECIAL ROUND STARTING!")
+    local roundname = net.ReadString()
+    local rounddesc = net.ReadString()
+    chat.AddText(Color(100, 255, 255), "SPECIAL ROUND!\n")
+    chat.AddText(Color(100, 255, 255), roundname)
+    chat.AddText(Color(100, 255, 255), rounddesc)
 end)
 
 net.Receive("SpecialRoundStart", function()
-    local roundname = net.ReadString()
-    chat.AddText(Color(100, 255, 255), "Current round: " .. roundname)
+    
+    chat.AddText(Color(100, 255, 255), "Special round started, glhf!")
 end)

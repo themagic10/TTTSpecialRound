@@ -7,14 +7,27 @@ teamdeathmatch.name = "teamdeathmatch"
 teamdeathmatch.title = "Traitors vs Detectives"
 
 
+teamdeathmatch.desc = "Half the players are traitors, the other half are detective. Last team standing wins"
+
+
 teamdeathmatch.utils = include("special_round_utils.lua")
 
 
+teamdeathmatch.prepare = function()
+end
+
+
 teamdeathmatch.begin = function()
-    hook.Add("TTTCheckForWin", "TeamDeathmatchWinCondition", function()
+    teamdeathmatch.utils.SetAlteredWinCondition()
+    teamdeathmatch.utils.SetTimerOnlyWinCheck(true)
+    hook.Add("PlayerDeath", "TeamDeathmatchWinCondition", function()
         local tcount = teamdeathmatch.utils.getTraitorCount()
         local dcount = teamdeathmatch.utils.getDetectiveCount()
-        if (dcount <= 0) then return WIN_TRAITOR elseif (tcount <= 0) then return WIN_INNOCENT else return WIN_NONE end
+        if (dcount <= 0) then
+            teamdeathmatch.utils.SetWinner(WIN_TRAITOR)
+        elseif (tcount <= 0) then
+            teamdeathmatch.utils.SetWinner(WIN_INNOCENT)
+        end 
     end)
 
     local players = player:GetAll()
@@ -36,8 +49,9 @@ end
 
 
 teamdeathmatch.restart = function()
-    hook.Remove("TTTCheckForWin", "TeamDeathmatchWinCondition")
+    hook.Remove("PlayerDeath", "TeamDeathmatchWinCondition")
     teamdeathmatch.utils.EnableCredits()
+    teamdeathmatch.utils.UnsetTimerOnlyWinCheck()
 end
 
 return teamdeathmatch

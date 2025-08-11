@@ -7,37 +7,27 @@ example_special_round.name = "myamazingspecialround"
 example_special_round.title = "Special round's title"
 
 
+example_special_round.desc = "My custom description of the round"
+
+
 example_special_round.utils = include("special_round_utils.lua")
 
 
+example_special_round.prepare = function()
+    --you can leave this empty
+end
+
+
 example_special_round.begin = function()
-    hook.Add("TTTCheckForWin", "TeamDeathmatchWinCondition", function()
-        local tcount = teamdeathmatch.utils.getTraitorCount()
-        local dcount = teamdeathmatch.utils.getDetectiveCount()
-        if (dcount <= 0) then return WIN_TRAITOR elseif (tcount <= 0) then return WIN_INNOCENT else return WIN_NONE end
-    end)
-
-    local players = player:GetAll()
-    table.Shuffle(players)
-    local lastwastraitor = false
-    for _, ply in ipairs(players) do
-        if lastwastraitor then
-            teamdeathmatch.utils.setDetective(ply, true)
-            lastwastraitor = false
-        else
-            teamdeathmatch.utils.setTraitor(ply, true)
-            lastwastraitor = true 
-        end
-    end
-    SendFullStateUpdate()
-
-    teamdeathmatch.utils.LimitCredits(1)
+    example_special_round.utils.setFFAWinCondition()
+    example_special_round.utils.setAllTraitor()
+    example_special_round.utils.DisableCredits()
 end
 
 
 example_special_round.restart = function()
-    hook.Remove("TTTCheckForWin", "TeamDeathmatchWinCondition")
-    teamdeathmatch.utils.EnableCredits()
+    example_special_round.utils.unsetFFAWinCondition()
+    example_special_round.utils.EnableCredits()
 end
 
 
