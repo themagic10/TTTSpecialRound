@@ -4,10 +4,11 @@ local ipairs = ipairs
 
 util.AddNetworkString("SpecialRoundPreparing")
 util.AddNetworkString("SpecialRoundStart")
+util.AddNetworkString("SpecialRoundEnd")
 
 MagicSpecialRound = {}
 MagicSpecialRound.name = "TTT Special Round"
-MagicSpecialRound.version = "0.4"
+MagicSpecialRound.version = "0.5"
 MagicSpecialRound.author = "Magic_1_0"
 --maybe leave a comment before sending a friend request to let me know you're not a spammer
 MagicSpecialRound.steamcontact = "https://steamcommunity.com/profiles/76561198196016631" 
@@ -52,8 +53,7 @@ local ActiveSpecialRound = nil
 
 
 local function ChooseRandomSpecialRound()
-    return specialrounds[1]
-    --return table.Random(specialrounds)
+    return table.Random(specialrounds)
 end
 
 
@@ -118,6 +118,8 @@ hook.Add("TTTEndRound", "EndSpecialRound", function()
         MagicSpecialRound.hasAlteredWinCondition = false
         MagicSpecialRound.WinnerOfSpecialRound = WIN_NONE
         MagicSpecialRound.TimerRanOut = false
+        net.Start("SpecialRoundEnd")
+        net.Broadcast()
         end)
     end
 end)
